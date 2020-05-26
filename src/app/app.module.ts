@@ -3,13 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { CustomValidatorsService } from './Validators/custom-validators.service';
+import { CustomValidatorsModule } from './Validators/custom-validators.module';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
+  imports:      [ BrowserModule, FormsModule, CustomValidatorsModule ],
   declarations: [ AppComponent ],
-  exports: [AppComponent],
   bootstrap:    [ AppComponent ],
-  providers: [CustomValidatorsService]
 })
 export class AppModule { }

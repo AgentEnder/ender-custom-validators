@@ -21,6 +21,7 @@ export class AppComponent  {
 
   updateFormValidity(){
     this.f.form.updateValueAndValidity()
+    Object.entries(this.f.controls).forEach(x=>x[1].updateValueAndValidity())
   }
 }
 

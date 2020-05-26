@@ -3,14 +3,14 @@
   {{e.name}}
 </p>
 
-<h2>Example of Regex Validator Directive</h2>
-<span class="aside">Validation may need to be updated after updating the pattern, simply click in and out of the test area to revalidate.</span>
 <form #f="ngForm">
+<h2>Example of Regex Validator Directive</h2>
+<span class="aside">Validate against a regex pattern. Validation may need to be updated after updating the pattern, simply click in and out of the test area to revalidate.</span>
   <input name="patternControl" 
          #pattern 
          style="display: block; margin-bottom:1rem" 
          placeholder="Regex Pattern"
-         (keydown)="updateFormValidity()">
+         (ngModelChange)="updateFormValidity()">
   <input name="testControl" 
          style="display: block" 
          placeholder="Test input"
@@ -18,4 +18,20 @@
          #testControl
          [pattern]="pattern.value"
          [(ngModel)]="testText">
+
+<h2>Example of Cross Validation Directive</h2>
+<span class="aside">Require one input only if the other has been filled</span>
+  <input name="parentControl" 
+         #other=""
+         style="display: block; margin-bottom:1rem" 
+         ngModel
+         (ngModelChange)="updateFormValidity()"
+         placeholder="Parent">
+  
+  <input name="childControl" 
+         style="display: block" 
+         placeholder="Test input"
+         RequiredIfOtherValidator
+         [otherControl]="f.controls['parentControl']"
+         ngModel>
 </form>

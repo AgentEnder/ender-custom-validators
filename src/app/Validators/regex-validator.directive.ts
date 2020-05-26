@@ -8,11 +8,14 @@ import { CustomValidatorsService } from './custom-validators.service';
 })
 export class RegexValidatorDirective implements Validator {
 
-  @Input() pattern: RegExp;
+  patternExpression: RegExp = /./;
+  @Input() set pattern(val){
+    this.patternExpression = new RegExp(val);
+  };
 
   constructor(private customValidator: CustomValidatorsService) { }
 
   validate(control: AbstractControl): { [key: string]: any } | null {
-    return this.customValidator.regexValidator(this.pattern)(control)
+    return this.customValidator.regexValidator(this.patternExpression)(control)
   }
 }
