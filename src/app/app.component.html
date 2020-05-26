@@ -1,0 +1,21 @@
+<h2>Dynamically list exports</h2>
+<p *ngFor="let e of exports">
+  {{e.name}}
+</p>
+
+<h2>Example of Regex Validator Directive</h2>
+<span class="aside">Validation may need to be updated after updating the pattern, simply click in and out of the test area to revalidate.</span>
+<form #f="ngForm">
+  <input name="patternControl" 
+         #pattern 
+         style="display: block; margin-bottom:1rem" 
+         placeholder="Regex Pattern"
+         (keydown)="updateFormValidity()">
+  <input name="testControl" 
+         style="display: block" 
+         placeholder="Test input"
+         RegexValidator
+         #testControl
+         [pattern]="pattern.value"
+         [(ngModel)]="testText">
+</form>

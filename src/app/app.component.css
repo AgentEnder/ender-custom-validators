@@ -1,0 +1,15 @@
+p {
+  font-family: Lato;
+}
+
+input.ng-invalid{
+  border-left: 4px solid red;
+  border-radius: 2px 0px 0px 2px;
+}
+
+.aside{
+  font-style: italic;
+  color: gray;
+  margin-bottom:1rem;
+  display: block;
+}
