@@ -26,9 +26,8 @@ export class AppComponent  {
 }
 
 function getModuleExports(angularModule: any): any[]|null {
-  // API of tsickle for lowering decorators to properties on the class.
   let annotations = getAnnotations(angularModule);
-  return annotations.map(x => x || x.exports)
+  return annotations ? annotations.map(x => x || x.exports) : [];
 }
 
 declare let Reflect: any;

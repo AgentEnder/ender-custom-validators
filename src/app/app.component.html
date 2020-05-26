@@ -2,6 +2,7 @@
 <p *ngFor="let e of exports">
        {{e.name}}
 </p>
+<p *ngIf="!exports || exports.length == 0">Failed to load list of exports</p>
 
 <form #f="ngForm" RealtimeValidate>
        <h2>Example of Regex Validator Directive</h2>
