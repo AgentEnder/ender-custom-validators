@@ -1,37 +1,47 @@
 <h2>Dynamically list exports</h2>
 <p *ngFor="let e of exports">
-  {{e.name}}
+       {{e.name}}
 </p>
 
-<form #f="ngForm">
-<h2>Example of Regex Validator Directive</h2>
-<span class="aside">Validate against a regex pattern. Validation may need to be updated after updating the pattern, simply click in and out of the test area to revalidate.</span>
-  <input name="patternControl" 
-         #pattern 
-         style="display: block; margin-bottom:1rem" 
-         placeholder="Regex Pattern"
-         (ngModelChange)="updateFormValidity()">
-  <input name="testControl" 
-         style="display: block" 
-         placeholder="Test input"
-         RegexValidator
-         #testControl
-         [pattern]="pattern.value"
-         [(ngModel)]="testText">
+<form #f="ngForm" RealtimeValidate>
+       <h2>Example of Regex Validator Directive</h2>
+       <fieldset>
+              <legend class="aside">Validate against a regex pattern. Validation may need to be updated after updating the
+                     pattern, simply click in and out of the test area to revalidate.</legend>
+              <input name="patternControl" #pattern placeholder="Regex Pattern" (ngModelChange)="updateFormValidity()">
+              <input name="testControl" style="display: block" placeholder="Test input" RegexValidator #testControl
+                     [pattern]="pattern.value" [(ngModel)]="testText">
+       </fieldset>
 
-<h2>Example of Cross Validation Directive</h2>
-<span class="aside">Require one input only if the other has been filled</span>
-  <input name="parentControl" 
-         #other=""
-         style="display: block; margin-bottom:1rem" 
-         ngModel
-         (ngModelChange)="updateFormValidity()"
-         placeholder="Parent">
-  
-  <input name="childControl" 
-         style="display: block" 
-         placeholder="Test input"
-         RequiredIfOtherValidator
-         [otherControl]="f.controls['parentControl']"
-         ngModel>
+       <h2>Example of Cross Validation Directive</h2>
+       <fieldset>
+              <legend class="aside">Require one input only if the other has been filled</legend>
+              
+              <input name="parentControl" #other="" ngModel (ngModelChange)="updateFormValidity()" placeholder="Parent">
+       
+              <input name="childControl" style="display: block" placeholder="Test input" RequiredIfOtherValidator
+                     [otherControl]="f.controls['parentControl']" ngModel>
+       </fieldset>
+
+       <h2>Require If Any Directive</h2>
+       <fieldset ngModelGroup="ra">
+              <legend class="aside">Require all inputs in a form if any of them are used</legend>
+              <input name="ra1" style="" ngModel RequireIfAny [parent]="f.controls['ra']" placeholder="Parent">
+              <input name="ra2" style="display: block" placeholder="Test input" ngModel RequireIfAny
+                     [parent]="f.controls['ra']">
+              <input name="ra3" style="display: block" placeholder="Test input" ngModel RequireIfAny
+                     [parent]="f.controls['ra']">
+              <input name="ra4" style="display: block" placeholder="Test input" ngModel RequireIfAny
+                     [parent]="f.controls['ra']">
+       </fieldset>
+       <fieldset>
+              <legend class="aside">Require all inputs in a form if any field in a separate form are used</legend>
+              <div ngModelGroup="ra5">
+                     <input name="ra8" ngModel placeholder="Parent">
+              </div>
+              
+              <div ngModelGroup="ra6">
+                     <input name="ra7" ngModel RequireIfAny [parent]="f.controls['ra5']" placeholder="Parent">
+              </div>
+       </fieldset>
 </form>

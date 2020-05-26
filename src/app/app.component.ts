@@ -27,12 +27,33 @@ export class AppComponent  {
 
 function getModuleExports(angularModule: any): any[]|null {
   // API of tsickle for lowering decorators to properties on the class.
-  if ((<any>angularModule).decorators) {
-    return convertTsickleDecoratorIntoMetadata((<any>angularModule).decorators)[0].exports;
+  let annotations = getAnnotations(angularModule);
+  return annotations.map(x => x || x.exports)
+}
+
+declare let Reflect: any;
+function getAnnotations(typeOrFunc: any): any[]|null {
+  // Prefer the direct API.
+  if ((<any>typeOrFunc).annotations) {
+    let annotations = (<any>typeOrFunc).annotations;
+    if (typeof annotations === 'function' && annotations.annotations) {
+      annotations = annotations.annotations;
+    }
+    return annotations;
   }
 
+  // API of tsickle for lowering decorators to properties on the class.
+  if ((<any>typeOrFunc).decorators) {
+    return convertTsickleDecoratorIntoMetadata((<any>typeOrFunc).decorators);
+  }
+
+  // API for metadata created by invoking the decorators.
+  if (Reflect && Reflect.getOwnMetadata) {
+    return Reflect.getOwnMetadata('annotations', typeOrFunc);
+  }
   return null;
 }
+
 
 function convertTsickleDecoratorIntoMetadata(decoratorInvocations: any[]): any[] {
   if (!decoratorInvocations) {
