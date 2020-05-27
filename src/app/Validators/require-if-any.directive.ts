@@ -9,10 +9,10 @@ import { CustomValidatorsService } from './custom-validators.service';
 })
 export class RequireIfAnyDirective implements Validator{
 
-  form: NgForm | FormGroup;
+  form: NgForm | FormGroup | AbstractControl;
   subscription: Subscription;
 
-  @Input('parent') set setForm(value: NgForm | FormGroup){
+  @Input('parent') set setForm(value: NgForm | FormGroup | AbstractControl){
     this.form = value;
   }
 

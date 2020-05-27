@@ -26,10 +26,12 @@ export class CustomValidatorsService {
    * Valid if all blank, or self is filled.
    * @param other Must have a 'value' property to work
    */
-  public requiredIfAny(form: NgForm | FormGroup): ValidatorFn {
+  public requiredIfAny(form: NgForm | FormGroup | AbstractControl): ValidatorFn {
     return (control: AbstractControl) => {
 
-      console.dir(form)
+      if (!('controls' in form)){
+        return {invalidFormGroup: true}
+      }
 
       // grab flags stating if any value has been set on each control
       const controls = Object.entries(form.controls).map(x => x[1])
