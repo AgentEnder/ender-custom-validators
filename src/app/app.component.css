@@ -4,7 +4,6 @@ p {
 
 input.ng-invalid{
   border-left: 4px solid red;
-  border-radius: 2px 0px 0px 2px;
 }
 
 .aside{
@@ -22,4 +21,21 @@ fieldset{
   margin: 1rem;
   padding: 1rem;
   border-radius: 0.5rem;
+}
+
+.body{
+  margin: 2rem 4rem
+}
+
+input{
+  width: 100%;
+  border-radius: 0.25rem;
+  height: 1.5rem;
+  border: lightgray solid 1px;
+}
+
+input:focus{
+  outline-color: lightskyblue;
+  outline-width: 2px;
+
 }
