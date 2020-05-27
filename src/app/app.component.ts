@@ -16,7 +16,8 @@ export class AppComponent  {
 
   constructor(){
     let t = getModuleExports(CustomValidatorsModule);
-    this.exports = t;//.map(x => x.name );
+    this.exports = t[0]//.map(x => x.name );
+    console.dir(t);
   }
 
   updateFormValidity(){
@@ -27,7 +28,7 @@ export class AppComponent  {
 
 function getModuleExports(angularModule: any): any[]|null {
   let annotations = getAnnotations(angularModule);
-  return annotations ? annotations.map(x => x || x.exports) : [];
+  return annotations ? annotations.map(x => x && x.exports) : [];
 }
 
 declare let Reflect: any;

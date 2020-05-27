@@ -10,17 +10,13 @@ export class RealtimeValidateDirective implements OnDestroy {
   
   constructor(@Self() private ngForm: NgForm) { 
     this.ngForm.valueChanges.subscribe(x=>{
-      console.log(x);
       this.recursivelyUpdateValidation(this.ngForm);
     })
   }
 
   recursivelyUpdateValidation(el: NgForm | AbstractControl){
-    console.dir(Object.entries(el).map(x=>x[0]))
-    console.dir(el);
     if (Object.entries(el).some(x=>x[0] == 'form' || x[0] == 'controls')){
       let f = el as NgForm;
-      console.dir(f);
       Object.entries(f.controls).forEach(element => {
         this.recursivelyUpdateValidation(element[1]);
       });

@@ -13,7 +13,6 @@ export class RequiredIfOtherDirective implements Validator {
   constructor(private customValidator: CustomValidatorsService) { }
 
   validate(control: AbstractControl): { [key: string]: any } | null {
-    console.dir(this.other);
     return this.customValidator.requiredIfOtherValidator(this.other)(control)
   }
 }
